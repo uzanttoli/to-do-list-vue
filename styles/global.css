@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@300&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+:root {
+    --text-primary: #818181;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.list{
+
+}
+.create-task{
+    padding: 10px 0 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #818181; 
+}
+
+.create-task p {
+    font-size: 25px;
+    font-family: 'Playpen Sans', cursive;
+}
+
+ul{
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+    padding: 8px;
+    margin: 7px;
+    border: 1px solid var(--text-primary);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+li span {
+    margin-left: 5px;
+    color: #333;
+    max-width: 200px;
+}
+
+.task-completed {
+    font-style: italic;
+    text-decoration: line-through;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.container-span {
+    width: 200px;
+    text-align: justify;
+}
+
+.break-text {
+    word-wrap: break-word;
+  }
+
+.create-task input {
+    padding: 8px;
+    margin: 0 0 0 5px;
+}
+
+.create-task button {
+    background-color: #05054b;
+    color: #fff;
+    padding: 8px;
+    margin: 0 5px 0 0;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .container {
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    font-size: 1.2rem;
+    user-select: none;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    --clr: #0B6E4F;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1.3em;
+    width: 1.3em;
+    background-color: #ccc;
+    border-radius: 50%;
+    transition: 300ms;
+  }
+  
+  .container input:checked ~ .checkmark {
+    background-color: var(--clr);
+    border-radius: .5rem;
+    animation: pulse 500ms ease-in-out;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .container .checkmark:after {
+    left: 0.45em;
+    top: 0.25em;
+    width: 0.25em;
+    height: 0.5em;
+    border: solid #E0E0E2;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 #0B6E4F90;
+      rotate: 20deg;
+    }
+  
+    50% {
+      rotate: -20deg;
+    }
+  
+    75% {
+      box-shadow: 0 0 0 10px #0B6E4F60;
+    }
+  
+    100% {
+      box-shadow: 0 0 0 13px #0B6E4F30;
+      rotate: 0;
+    }
+  }
+
+
+  i {
+    cursor: pointer;
+  }

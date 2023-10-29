@@ -20,6 +20,8 @@
             type="text"
             placeholder="Digite uma tarefa!"
             v-model="insertTask"
+            v-on:keyup.enter="createTasks"
+            focus
           />
           <button v-on:click="createTasks()">Criar</button>
         </div>
@@ -44,7 +46,10 @@
               </div>
             </label>
             <div class="other-action">
-              <button v-on:click="otherTask('remove', item.id)" v-bind:disabled="item.checked">
+              <button
+                v-on:click="otherTask('remove', item.id)"
+                v-bind:disabled="item.checked"
+              >
                 <i class="fas fa-trash-alt"></i>
               </button>
               <!-- <button v-on:click="otherTask('update', item.id)"><i class="fas fa-edit"></i></button> -->
@@ -55,6 +60,7 @@
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     var app = new Vue({
@@ -67,12 +73,51 @@
         createTasks() {
           if (!this.insertTask) return;
           let idRandom = Number(new Date().toISOString().replace(/\D/g, ""));
-          this.listTasks.unshift({
-            id: idRandom,
-            task: this.insertTask.toUpperCase(),
-            checked: false,
-          });
-          this.insertTask = null;
+
+          let existingTask = this.listTasks.find(
+            (item) => item.task == this.insertTask.toUpperCase()
+          );
+          if (existingTask) {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "bottom-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+              },
+            });
+
+            Toast.fire({
+              icon: "error",
+              title: "Já existe uma tarefa da mesma em andamento!",
+            });
+          } else {
+            this.listTasks.unshift({
+              id: idRandom,
+              task: this.insertTask.toUpperCase(),
+              checked: false,
+            });
+            this.insertTask = null;
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "bottom-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+              },
+            });
+
+            Toast.fire({
+              icon: "success",
+              title: "Tarefa criada com sucesso!",
+            });
+          }
         },
         actionTask(item) {
           let updatedTask = this.listTasks.find(
@@ -80,6 +125,24 @@
           );
           if (updatedTask) {
             updatedTask.checked = item.target.checked;
+            if (item.target.checked) {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener("mouseenter", Swal.stopTimer);
+                  toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
+              });
+
+              Toast.fire({
+                icon: "success",
+                title: "Tarefa concluída com sucesso!",
+              });
+            }
           }
         },
         otherTask(action, id) {
@@ -94,6 +157,22 @@
               (object) => object.id == id
             );
             this.listTasks.splice(indice, 1);
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "bottom-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+              },
+            });
+
+            Toast.fire({
+              icon: "info",
+              title: "Tarefa excluída com sucesso!",
+            });
           }
         },
       },

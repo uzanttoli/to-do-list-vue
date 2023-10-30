@@ -15,7 +15,9 @@
     <div id="app" class="app">
       <div class="list">
         <div class="create-task">
-          <p>Criar Tarefas</p>
+          <p>
+            <span class="typing-effect">Criar Tarefas</span>
+          </p>
           <input
             type="text"
             placeholder="Digite uma tarefa!"
@@ -23,10 +25,45 @@
             v-on:keyup.enter="createTasks"
             focus
           />
+          <fieldset>
+            <legend>Urgência</legend>
+            <div class="input-radio">
+              <div>
+                <input
+                  type="radio"
+                  name="urgency"
+                  id="check-low"
+                  value="check-low"
+                  v-model="urgency"
+                />
+                <label for="check-low" id="low">Baixa</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="urgency"
+                  id="check-average"
+                  value="check-average"
+                  v-model="urgency"
+                />
+                <label for="check-average" id="average">Média</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="urgency"
+                  id="check-high"
+                  value="check-high"
+                  v-model="urgency"
+                />
+                <label for="check-high" id="high">Alto</label>
+              </div>
+            </div>
+          </fieldset>
           <button v-on:click="createTasks()">Criar</button>
         </div>
         <ul v-for="(item, i) in listTasks" :key="i">
-          <li :class="item.checked == true ? 'task-completed' : ''">
+          <li :class="item.urgency">
             <label class="container">
               <input
                 type="checkbox"
@@ -52,7 +89,6 @@
               >
                 <i class="fas fa-trash-alt"></i>
               </button>
-              <!-- <button v-on:click="otherTask('update', item.id)"><i class="fas fa-edit"></i></button> -->
             </div>
           </li>
         </ul>
@@ -61,13 +97,14 @@
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  <script src="js/javascript.js"></script>
   <script>
     var app = new Vue({
       el: "#app",
       data: {
         insertTask: null,
         listTasks: [],
+        urgency: "check-low",
       },
       methods: {
         createTasks() {
@@ -78,45 +115,16 @@
             (item) => item.task == this.insertTask.toUpperCase()
           );
           if (existingTask) {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "center",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener("mouseenter", Swal.stopTimer);
-                toast.addEventListener("mouseleave", Swal.resumeTimer);
-              },
-            });
-
-            Toast.fire({
-              icon: "error",
-              title: "Já existe uma tarefa da mesma em andamento!",
-            });
+            // toastAlert("error", "Já existe uma tarefa da mesma em andamento!");
           } else {
             this.listTasks.unshift({
               id: idRandom,
               task: this.insertTask.toUpperCase(),
+              urgency: this.urgency,
               checked: false,
             });
             this.insertTask = null;
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "center",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener("mouseenter", Swal.stopTimer);
-                toast.addEventListener("mouseleave", Swal.resumeTimer);
-              },
-            });
-
-            Toast.fire({
-              icon: "success",
-              title: "Tarefa criada com sucesso!",
-            });
+            // toastAlert("success", "Tarefa criada com sucesso!");
           }
         },
         actionTask(item) {
@@ -126,22 +134,7 @@
           if (updatedTask) {
             updatedTask.checked = item.target.checked;
             if (item.target.checked) {
-              const Toast = Swal.mixin({
-                toast: true,
-                position: "center",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener("mouseenter", Swal.stopTimer);
-                  toast.addEventListener("mouseleave", Swal.resumeTimer);
-                },
-              });
-
-              Toast.fire({
-                icon: "success",
-                title: "Tarefa concluída com sucesso!",
-              });
+              // toastAlert("success", "Tarefa concluída com sucesso!");
             }
           }
         },
@@ -157,22 +150,7 @@
               (object) => object.id == id
             );
             this.listTasks.splice(indice, 1);
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "center",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener("mouseenter", Swal.stopTimer);
-                toast.addEventListener("mouseleave", Swal.resumeTimer);
-              },
-            });
-
-            Toast.fire({
-              icon: "info",
-              title: "Tarefa excluída com sucesso!",
-            });
+            // toastAlert("info", "Tarefa excluída com sucesso!");
           }
         },
       },

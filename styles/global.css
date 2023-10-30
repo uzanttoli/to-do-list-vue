@@ -14,9 +14,6 @@ body {
     justify-content: center;
 }
 
-.list{
-
-}
 .create-task{
     padding: 10px 0 10px 0;
     margin-bottom: 10px;
@@ -36,6 +33,7 @@ li {
     list-style: none;
     padding: 8px;
     margin: 7px;
+    max-width: 300px;
     border: 1px solid var(--text-primary);
     border-radius: 10px;
     display: flex;
@@ -67,14 +65,17 @@ li span {
 
 .create-task input {
     padding: 8px;
-    margin: 0 0 0 5px;
+    border-width: 1px;
+    border-color: #818181;
+    /* width: 93%; */
 }
 
 .create-task button {
     background-color: #05054b;
+    width: 100%;
     color: #fff;
     padding: 8px;
-    margin: 0 5px 0 0;
+    margin: 5px 5px 0 0;
 }
 
 .container input {
@@ -101,7 +102,7 @@ li span {
     left: 0;
     height: 1.3em;
     width: 1.3em;
-    background-color: #ccc;
+    background-color: #fcfcfc;
     border-radius: 50%;
     transition: 300ms;
   }
@@ -155,4 +156,58 @@ li span {
 
   i {
     cursor: pointer;
+  }
+
+
+  .input-radio{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  #low{
+    color: #0B6E4F;
+  }
+
+  #average {
+    color: #e4a111;
+  }
+
+  #high {
+    color: #ff0000;
+  }
+
+  fieldset {
+    padding: 7px;
+    border-width: 1px;
+  }
+
+  .check-low {
+    background-color: #d3faee;
+    color: #E0E0E2;
+  }
+  .check-average {
+    background-color: #f5e0b3;
+    color: #E0E0E2;
+  }
+  .check-high {
+    background-color: #f7b5b5;
+    color: #E0E0E2;
+  }
+
+  .typing-effect {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 1px solid #000; /* Simula o cursor piscando */
+    white-space: nowrap;
+    font-size: 24px;
+    animation: typing 2s steps(30) 1s 1 normal both;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
   }

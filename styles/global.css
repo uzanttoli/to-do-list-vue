@@ -12,202 +12,61 @@
 body {
     display: flex;
     justify-content: center;
+    background-color: #fafafa;
+    height: 100vh;
 }
 
-.create-task{
-    padding: 10px 0 10px 0;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #818181; 
+.create-task {
+  margin-top: 20px;
 }
 
-.create-task p {
-    font-size: 25px;
-    font-family: 'Playpen Sans', cursive;
+.title{
+  margin-bottom: 10px;
+}
+.input-radio{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-ul{
-    text-decoration: none;
+
+.container {
+  display: flex;
 }
 
 li {
-    list-style: none;
-    padding: 8px;
-    margin: 7px;
-    max-width: 300px;
-    border: 1px solid var(--text-primary);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+
 }
 
-li span {
-    margin-left: 5px;
-    color: #333;
-    max-width: 200px;
+.card {
+  padding: 10px;
+  margin: 5px;
 }
+
 
 .task-completed {
-    font-style: italic;
-    text-decoration: line-through;
-    color: var(--text-primary);
-    font-weight: 600;
+  font-style: italic;
+  text-decoration: line-through;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
-.container-span {
-    width: 200px;
-    text-align: justify;
+.break-text{
+  margin-left: 10px;
 }
 
-.break-text {
-    word-wrap: break-word;
-  }
-
-.create-task input {
-    padding: 8px;
-    border-width: 1px;
-    border-color: #818181;
-    /* width: 93%; */
+.box {
+  padding: 5px !important;
 }
 
-.create-task button {
-    background-color: #05054b;
-    width: 100%;
-    color: #fff;
-    padding: 8px;
-    margin: 5px 5px 0 0;
+.check-high {
+  background-color: #ffa7a7 !important;
 }
-
-.container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  .container {
-    display: flex;
-    position: relative;
-    cursor: pointer;
-    font-size: 1.2rem;
-    user-select: none;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
-    --clr: #0B6E4F;
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 1.3em;
-    width: 1.3em;
-    background-color: #fcfcfc;
-    border-radius: 50%;
-    transition: 300ms;
-  }
-  
-  .container input:checked ~ .checkmark {
-    background-color: var(--clr);
-    border-radius: .5rem;
-    animation: pulse 500ms ease-in-out;
-  }
-  
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  .container input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  .container .checkmark:after {
-    left: 0.45em;
-    top: 0.25em;
-    width: 0.25em;
-    height: 0.5em;
-    border: solid #E0E0E2;
-    border-width: 0 0.15em 0.15em 0;
-    transform: rotate(45deg);
-  }
-  
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 #0B6E4F90;
-      rotate: 20deg;
-    }
-  
-    50% {
-      rotate: -20deg;
-    }
-  
-    75% {
-      box-shadow: 0 0 0 10px #0B6E4F60;
-    }
-  
-    100% {
-      box-shadow: 0 0 0 13px #0B6E4F30;
-      rotate: 0;
-    }
-  }
-
-
-  i {
-    cursor: pointer;
-  }
-
-
-  .input-radio{
-    display: flex;
-    justify-content: space-around;
-  }
-
-  #low{
-    color: #0B6E4F;
-  }
-
-  #average {
-    color: #e4a111;
-  }
-
-  #high {
-    color: #ff0000;
-  }
-
-  fieldset {
-    padding: 7px;
-    border-width: 1px;
-  }
-
-  .check-low {
-    background-color: #d3faee;
-    color: #E0E0E2;
-  }
-  .check-average {
-    background-color: #f5e0b3;
-    color: #E0E0E2;
-  }
-  .check-high {
-    background-color: #f7b5b5;
-    color: #E0E0E2;
-  }
-
-  .typing-effect {
-    display: inline-block;
-    overflow: hidden;
-    border-right: 1px solid #000; /* Simula o cursor piscando */
-    white-space: nowrap;
-    font-size: 24px;
-    animation: typing 2s steps(30) 1s 1 normal both;
-  }
-
-  @keyframes typing {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
+.check-average {
+  background-color: #fdc17c !important;
+}
+.check-low {
+  background-color: #b4f5a0 !important;
+}

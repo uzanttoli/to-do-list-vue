@@ -9,88 +9,112 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <title>Lista de Tarefas</title>
   </head>
   <body>
     <div id="app" class="app">
       <div class="list">
         <div class="create-task">
-          <p>
-            <span class="typing-effect">Criar Tarefas</span>
+          <p style="margin-bottom: 10px">
+            <span class="title">Criar Tarefas</span>
           </p>
           <input
+            class="input is-primary"
             type="text"
             placeholder="Digite uma tarefa!"
             v-model="insertTask"
             v-on:keyup.enter="createTasks"
             focus
           />
-          <fieldset>
+          <fieldset class="field box">
             <legend>Urgência</legend>
-            <div class="input-radio">
+            <div class="input-radio control">
               <div>
-                <input
-                  type="radio"
-                  name="urgency"
-                  id="check-low"
-                  value="check-low"
-                  v-model="urgency"
-                />
-                <label for="check-low" id="low">Baixa</label>
+                <label for="check-low" id="low">
+                  <input
+                    type="radio"
+                    name="urgency"
+                    class="is-checkradio"
+                    id="check-low"
+                    value="check-low"
+                    v-model="urgency"
+                  />
+
+                  Baixa</label
+                >
               </div>
               <div>
-                <input
-                  type="radio"
-                  name="urgency"
-                  id="check-average"
-                  value="check-average"
-                  v-model="urgency"
-                />
-                <label for="check-average" id="average">Média</label>
+                <label class="radio" for="check-average" id="average">
+                  <input
+                    type="radio"
+                    name="urgency"
+                    id="check-average"
+                    class="is-checkradio"
+                    value="check-average"
+                    v-model="urgency"
+                  />
+                  Média
+                </label>
               </div>
               <div>
-                <input
-                  type="radio"
-                  name="urgency"
-                  id="check-high"
-                  value="check-high"
-                  v-model="urgency"
-                />
-                <label for="check-high" id="high">Alto</label>
+                <label for="check-high" id="high" class="radio">
+                  <input
+                    type="radio"
+                    name="urgency"
+                    class="is-checkradio"
+                    id="check-high"
+                    value="check-high"
+                    v-model="urgency"
+                  />
+                  Alto</label
+                >
               </div>
             </div>
           </fieldset>
-          <button v-on:click="createTasks()">Criar</button>
+          <button
+            v-on:click="createTasks()"
+            class="button is-primary is-rounded is-fullwidth"
+          >
+            Criar
+          </button>
         </div>
         <ul v-for="(item, i) in listTasks" :key="i">
-          <li :class="item.urgency">
-            <label class="container">
-              <input
-                type="checkbox"
-                :name="item.task"
-                :id="item.id"
-                v-on:change="actionTask"
-                v-bind:checked="item.checked"
-              />
-              <div class="checkmark"></div>
-              <div class="container-span">
-                <span
-                  :class="item.checked == true ? 'task-completed' : ''"
-                  class="break-text"
+          <div class="card" :class="item.urgency">
+            <li>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  :name="item.task"
+                  :id="item.id"
+                  v-on:change="actionTask"
+                  v-bind:checked="item.checked"
+                />
+                <div class="checkmark"></div>
+                <div class="container-span">
+                  <span
+                    :class="item.checked == true ? 'task-completed' : ''"
+                    class="break-text"
+                  >
+                    {{item.task}}
+                  </span>
+                </div>
+              </label>
+              <div class="other-action">
+                <button
+                  v-on:click="otherTask('remove', item.id)"
+                  v-bind:disabled="item.checked"
                 >
-                  {{item.task}}
-                </span>
+                  <span class="icon">
+                    <i class="fas fa-trash"></i>
+                  </span>
+                </button>
               </div>
-            </label>
-            <div class="other-action">
-              <button
-                v-on:click="otherTask('remove', item.id)"
-                v-bind:disabled="item.checked"
-              >
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </div>
-          </li>
+            </li>
+          </div>
         </ul>
       </div>
     </div>
